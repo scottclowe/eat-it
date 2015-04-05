@@ -49,12 +49,13 @@ clf.fit(X,np.log(y))
 yp = np.exp(clf.predict(Xt))
 
 # Write submission file
-mobile_factor = 0.90
-li = test['Type']=='MB'
-print('Found {} Mobile types'.format(sum(li)))
-yp[li] = yp[li]*mobile_factor
+refactor = 0.90
+type_search = 'MB'
+li = test['Type'].values==type_search
+print('Found {} of {} are {} types'.format(sum(li),len(li),type_search))
+yp[li] = yp[li]*refactor
 
 sub = pd.DataFrame(test['Id'])
 sub['Prediction'] = yp
-sub.to_csv('sub_{}.csv'.format(mobile_factor), index=False)
+sub.to_csv('sub_{}{}.csv'.format(type_search,refactor), index=False)
 
