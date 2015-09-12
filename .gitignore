@@ -1,5 +1,7 @@
 # Folders
 data/
+*.csv
+*.tsv
 
 # Vim
 *.swp

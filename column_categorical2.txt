@@ -1,0 +1,39 @@
+With Stratified 1-of-k, with 10-folds, 250 seeds, +30 genuine test samples
+----------
+P1  BoxCox
+P2  OneHot / Ordinal
+P3  BoxCox
+P4  BoxCox
+P5  Def (BoxCox)
+P6  BoxCox
+P7  BoxCox
+P8  BoxCox
+P9  BoxCox
+P10 BoxCox
+P11 BoxCox
+P12 Def (BoxCox)
+P13 BoxCox
+P14 BoxCox
+P15 BoxCox
+P16 Ordinal
+P17 BoxCox
+P18 Def (BoxCox)
+P19 Def (BoxCox)
+P20 BoxCox
+P21 Ordinal (BoxCox)
+P22 Def (Ordinal/BoxCox)
+P23 Def (BoxCox)
+P24 BoxCox
+P25 BoxCox
+P26 BoxCox
+P27 Def (BoxCox)
+P28 BoxCox
+P29 BoxCox
+P30 Def (BoxCox)
+P31 Def (BoxCox)
+P32 Def (BoxCox)
+P33 Def (BoxCox)
+P34 Def (... BoxCox)
+P35 Def (BoxCox)
+P36 Ordinal
+P37 BoxCox

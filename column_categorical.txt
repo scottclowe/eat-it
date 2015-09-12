@@ -1,0 +1,42 @@
+With Stratified 1-of-k, with 10-folds, 250 seeds
+----------
+  P1  BoxCox
+  P2  OneHot
+1 P3  BoxCox
+  P4  BoxCox
+  P5  Default
+  P6  BoxCox
+  P7  BoxCox
+  P8  BoxCox
+  P9  Default
+  P10 ? OneHot
+  P11 BoxCox
+  P12 BoxCox
+  P13 BoxCox
+2 P14 Default
+2 P15 Default/BoxCox
+2 P16 Default (clear)
+2 P17 BoxCox (clear)
+2 P18 Default (clear)
+  P19 Default (clear)
+  P20 BoxCox (clear)
+  P21 BoxCox
+  P22 Default/BoxCox
+  P23 Default
+2 P24 Default
+2 P25 Default
+2 P26 Default
+2 P27 Default
+  P28 BoxCox
+1 P29 BoxCox=Default
+2 P30 Default
+2 P31 Default
+2 P32 Default
+2 P33 Default
+2 P34 Default
+2 P35 Default (clear)
+2 P36 Default
+2 P37 Default
+  Age BoxCox (clear)
+  Big binary
+  Typ binary

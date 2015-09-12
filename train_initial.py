@@ -49,7 +49,7 @@ clf.fit(X,np.log(y))
 yp = np.exp(clf.predict(Xt))
 
 # Write submission file
-refactor = 0.260568
+refactor = 1.0
 type_search = 'MB'
 li = test['Type'].values==type_search
 print('Found {} of {} are {} types'.format(sum(li),len(li),type_search))

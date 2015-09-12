@@ -3,10 +3,9 @@
 # Import package dependencies
 import pandas as pd
 import numpy as np
-import collections
 import datetime
 import pickle
-import yaml
+import collections
 # Import from this project
 from eat_it import utils
 from eat_it import params
@@ -41,7 +40,7 @@ def search_cluster(cluster, uhistdict):
         field_name.append(col)
         field_clarity.append((y[sort_idx[-1]] - uhistdict[col][1][sort_idx[-1]]) /
                         (y[sort_idx[-2]] - uhistdict[col][1][sort_idx[-2]]))
-        field_altdist.append(y[sort_idx[-2]] - uhistdict[col][1][sort_idx[-2]])
+        field_altdist.append(y[sort_idx[-2]] - uhistdict[col][1][sort_idx[-2])
     
     return cluster_centre, field_name, field_clarity, field_altdist
 
@@ -100,7 +99,7 @@ genuinetestdict = collections.OrderedDict()
 
 for i,trigger in enumerate(unique_triggers):
     # Start with blank in case we can't manage it
-    #genuinetestmap[trigger] = None
+    genuinetestmap[trigger] = None
     if verbosity>=2:
         print('Considering cluster {}: {}={}'.format(i, trigger_column, trigger))
     # Isolate the cluster + junk which has this opening date
@@ -148,7 +147,7 @@ for i,trigger in enumerate(unique_triggers):
             
             # CLUSTER 1
             # Find the centre of the cluster
-            cluster_centre, field_name, field_clarity, field_altdist = search_cluster(cluster1, uhistdict)
+            cluster_centre, field_name, field_clarity, field_altdist = search_cluster(cluster1, columns, uhistdict)
             # Now see which entries in the table match the cluster centre
             li_centre = find_matches(cluster, cluster_centre)
             # Sanity check
@@ -161,14 +160,14 @@ for i,trigger in enumerate(unique_triggers):
                 print('Failed XOR test for cluster 1 {}={}'.format(trigger_column, trigger))
             else:
                 ids = cluster[li_centre]['Id'].values
-                uid = -ids[0]
+                uid = ids[0]
                 genuinetestmap[uid] = ids
                 genuinetestdict[uid] = cluster_centre
                 genuinetestdict[uid]['Id'] = uid
             
             # CLUSTER 2
             # Find the centre of the cluster
-            cluster_centre, field_name, field_clarity, field_altdist = search_cluster(cluster2, uhistdict)
+            cluster_centre, field_name, field_clarity, field_altdist = search_cluster(cluster2, columns, uhistdict)
             # Now see which entries in the table match the cluster centre
             li_centre = find_matches(cluster, cluster_centre)
             # Sanity check
@@ -181,7 +180,7 @@ for i,trigger in enumerate(unique_triggers):
                 print('Failed XOR test for cluster 2 {}={}'.format(trigger_column, trigger))
             else:
                 ids = cluster[li_centre]['Id'].values
-                uid = -ids[0]
+                uid = ids[0]
                 genuinetestmap[uid] = ids
                 genuinetestdict[uid] = cluster_centre
                 genuinetestdict[uid]['Id'] = uid
@@ -199,35 +198,26 @@ for i,trigger in enumerate(unique_triggers):
     
     # Should do XOR sanity check now
     if not col_xor(cluster_centre):
-        print('Failed XOR test for {}={}, but using it anyway'.format(trigger_column, trigger))
+        print('Failed XOR test for {}={}'.format(trigger_column, trigger))
         print(cluster_centre)
+        continue
+    
     # Everything seems okay
-    elif verbosity>=2:
+    if verbosity>=2:
         print('Successfully detected {} centres for {}={}'.format(sum(li_centre),
                                                             trigger_column, trigger))
-    # Add to our holding variables
+    
     ids = cluster[li_centre]['Id'].values
-    uid = -ids[0]
+    uid = ids[0]
     genuinetestmap[uid] = ids
     genuinetestdict[uid] = cluster_centre
     genuinetestdict[uid]['Id'] = uid
 
 # Save the isolated test examples
-# Build a pandas table
 genuinetest = pd.DataFrame.from_dict(genuinetestdict, orient='index')
-# Move Id column to start
-cols = list(genuinetest.columns)
-cols = cols[-1:] + cols[:-1]
-genuinetest = genuinetest[cols]
-# Save isolated genuine test examples as CSV
-genuinetest.to_csv('data/genuinetest.csv', index=False)
+genuinetest.to_csv('data/genuinetest2.csv', index=False)
 
 # Save a dictionary of which test entries map to this cluster centre
-with open('data/genuinetestmap.pkl', 'wb') as hf:
+with open('data/genuinetestmap2.pkl', 'wb') as hf:
     pickle.dump(genuinetestmap, hf)
-
-# Save a dictionary of which test entries map to this cluster centre
-with open('data/genuinetestmap.txt', 'w') as hf:
-    for k,v in genuinetestmap.items():
-        hf.write('{}: {}\n'.format(k,v))
 
